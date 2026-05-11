@@ -46,7 +46,14 @@
 - [ ] Add validation scripts for missing items and invalid price relationships.
 - [ ] Add a report that lists buy/sell ratios and exceptions.
 - [ ] Add a repeatable test process using the local server.
-- [ ] Prototype a Paper helper plugin that reads worth values and reports recipe-derived value suggestions.
-- [ ] Use Paper recipe APIs to inspect shaped, shapeless, cooking, stonecutting, smithing, and other registered recipes.
-- [ ] Use the Paper 26.1.2 `Material` enum as the canonical item/material list for completeness checks.
-- [ ] Ensure helper tooling outputs suggested `cmi setworth item -s:value` commands without applying them automatically.
+- [x] Prototype a Paper helper plugin that reads worth values and reports recipe-derived value suggestions.
+- [x] Use Paper recipe APIs to inspect shaped, shapeless, cooking, stonecutting, smithing, and other registered recipes.
+- [x] Use the Paper 26.1.2 `Material` enum as the canonical item/material list for completeness checks.
+- [x] Ensure helper tooling outputs suggested `cmi setworth item -s:value` commands without applying them automatically.
+- [x] Copy 1MB-CMIAPI-LIB, WorthDrift, and WorthHelper build `216` jars to the economy test server.
+- [ ] Smoke test `/worthhelper status` on the economy test server.
+- [ ] Smoke test `/worthhelper scan` on the economy test server.
+- [ ] Smoke test `/worthhelper missing` on the economy test server.
+- [ ] Smoke test `/worthhelper recipes diamond_block` on the economy test server.
+- [ ] Smoke test `/worthhelper export` on the economy test server.
+- [ ] Decide where exported WorthHelper reports should live in this repo.

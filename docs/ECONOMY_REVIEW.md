@@ -64,14 +64,30 @@ Suggested report fields:
   iron, diamond, netherite, and rare loot.
 - Recommendation: keep, adjust, blacklist, or needs human review.
 
-## Helper Plugin Idea
+## WorthHelper
 
-A Paper helper plugin could produce review reports for `Worth.yml` without
-modifying the economy automatically.
+WorthHelper is implemented in the `1MB-CMIAPI-LIB` project as a separate
+server-management feature plugin. This economy repo consumes its reports while
+keeping the tracked CMI and ShopGUI+ config mirror in `data/`.
 
-Possible responsibilities:
+Current economy test server jars:
 
-- Load CMI worth values from the tracked `data/CMI/Worth.yml`.
+- `servers/Paper-26.1.2/plugins/1MB-CMIAPI-LIB-v1.0.0-216-j25-26.1.2.jar`
+- `servers/Paper-26.1.2/plugins/1MB-CMIAPI-WorthDrift-v1.0.0-216-j25-26.1.2.jar`
+- `servers/Paper-26.1.2/plugins/1MB-CMIAPI-WorthHelper-v1.0.0-216-j25-26.1.2.jar`
+
+Available commands:
+
+- `/worthhelper status`
+- `/worthhelper scan [page]`
+- `/worthhelper missing [page]`
+- `/worthhelper recipes <material> [page]`
+- `/worthhelper export`
+- `/worthhelper reload`
+
+WorthHelper responsibilities:
+
+- Load CMI worth values from the live server's `plugins/CMI/Saves/Worth.yml`.
 - Enumerate available materials using the Paper `Material` enum.
 - Compare materials against the blacklist and `cmi worthlist -missing` output.
 - Query registered recipes with Paper server recipe APIs.
@@ -84,6 +100,16 @@ Possible responsibilities:
 - Include farmability, ease of access, and human-value notes in the report.
 - Output suggested `cmi setworth item -s:value` commands, but do not run them by
   default.
+
+Smoke test flow on the economy test server:
+
+1. Start `servers/Paper-26.1.2`.
+2. Run `/worthhelper status`.
+3. Run `/worthhelper scan`.
+4. Run `/worthhelper missing`.
+5. Run `/worthhelper recipes diamond_block`.
+6. Run `/worthhelper export`.
+7. Review the exported Markdown report before making any economy edits.
 
 Useful Paper resources:
 

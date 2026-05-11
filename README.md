@@ -108,11 +108,31 @@ the resulting `/buy` price impact.
 Price edits should be opt-in: suggest the changes first, then apply them after
 approval.
 
-## Helper Plugin Idea
+## WorthHelper
 
-A small Paper helper plugin could inspect registered recipes, compare them
-against `data/CMI/Worth.yml`, and produce a report with suggested CMI commands
-instead of writing changes directly.
+WorthHelper is implemented in the `1MB-CMIAPI-LIB` project as a separate
+server-management feature plugin. This repo uses WorthHelper reports to review
+economy values; it does not own the plugin source.
+
+Local economy test server jars currently expected in
+`servers/Paper-26.1.2/plugins/`:
+
+- `1MB-CMIAPI-LIB-v1.0.0-216-j25-26.1.2.jar`
+- `1MB-CMIAPI-WorthDrift-v1.0.0-216-j25-26.1.2.jar`
+- `1MB-CMIAPI-WorthHelper-v1.0.0-216-j25-26.1.2.jar`
+
+WorthHelper commands:
+
+- `/worthhelper status`
+- `/worthhelper scan [page]`
+- `/worthhelper missing [page]`
+- `/worthhelper recipes <material> [page]`
+- `/worthhelper export`
+- `/worthhelper reload`
+
+WorthHelper is read-only by default. It may output suggested
+`cmi setworth item -s:value` commands as text, but economy changes still need
+human review and approval before being applied.
 
 Useful Paper resources:
 
