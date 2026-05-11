@@ -1,0 +1,44 @@
+# macOS and editor noise
+.DS_Store
+._*
+.LSOverride
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local secrets and machine-specific config
+.env
+.env.*
+!.env.example
+*.local.yml
+*.local.yaml
+*.secret.yml
+*.secret.yaml
+
+# Logs, temp files, and local caches
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# Java/Gradle/Maven build outputs
+.gradle/
+build/
+out/
+target/
+*.class
+
+# Local Minecraft/Paper test server runtime
+# Keep curated economy config files in tracked project folders, not in live server dumps.
+servers/
+
+# Common plugin databases and generated data
+*.db
+*.sqlite
+*.sqlite3
+**/database/
+**/databases/
+**/userdata/
