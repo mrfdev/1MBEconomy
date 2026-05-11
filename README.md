@@ -19,6 +19,11 @@ the default rule:
 For example, if a stick has a CMI worth value of `1`, the ShopGUI+ buy price
 should be `100`, unless there is a documented exception.
 
+The tracked economy data lives in `data/`. Keep it current with the local test
+server configs, but do not change worth values just because a script reports a
+difference. Price changes should be proposed first, reviewed, and then applied
+after approval.
+
 ## Balancing Rules
 
 Pricing should account for how items enter the economy, including:
@@ -29,6 +34,9 @@ Pricing should account for how items enter the economy, including:
 - Stonecutter recipes.
 - Waxing, unwaxing, oxidation, scraping, stripping, dyeing, and similar item transformations.
 - Edge cases that can create infinite loops, arbitrage, or duplication-like value gain.
+- Whether the item can be automatically farmed or obtained very easily.
+- Human expectations about value hierarchy, such as iron feeling more valuable
+  than copper, and diamond feeling more valuable than iron and copper.
 
 The first pass should cover all in-game items except a small documented
 blacklist of items that should not be sold or bought.
@@ -44,26 +52,78 @@ Current unofficial blacklist:
 
 ## Repository Layout
 
-Planned structure:
+Current structure:
 
-- `worth/` - curated CMI `worth.yml` files and worth-related notes.
-- `shops/` - curated ShopGUI+ buy shop configuration files.
-- `reference/` - imported live-server configs used for comparison.
+- `data/CMI/Worth.yml` - tracked CMI worth values mirrored from the test server.
+- `data/ShopGUIPlus/shops/` - tracked ShopGUI+ buy shop files mirrored from the test server.
 - `docs/` - analysis notes, pricing rationale, and exception lists.
 - `servers/` - local test server runtime. This folder is ignored by git.
 
 When live or test-server config files need to be reviewed, copy the relevant
-files into `reference/`, `worth/`, or `shops/` instead of committing a full
-server directory.
+files into `data/` instead of committing a full server directory.
 
 Current local source paths:
 
 - CMI worth file: `servers/Paper-26.1.2/plugins/CMI/Saves/Worth.yml`
 - ShopGUI+ buy shop files: `servers/Paper-26.1.2/plugins/ShopGUIPlus/shops/*.yml`
 
+## CMI Worth Commands
+
+Handy to know:
+
+```text
+cmi setworth (itemname) -s:(sellPrice)
+cmi setworth stick -s:0.55
+```
+
+Useful review commands:
+
+- `cmi worth (all/blocks/hand/material)`
+- `cmi worthlist -missing` - shows items missing from the worth list.
+- `cmi generateworth` - console-only command that estimates missing values from recipe ingredient values.
+
+CMI's `generateworth` command uses the `AutoGenerate.PriceIncrease` setting
+from CMI `config.yml`:
+
+```yml
+Worth:
+  AutoGenerate:
+    # Value in percentages in how much more we should add to end product while auto calculating items price based on its ingredient worth
+    # For example one stick is worth 0.1 and diamond 44 then end result as diamond_hoe will be worth 88.2 and with extra 2% this will be changed to 89.96
+    # Value can be negative
+    PriceIncrease: 0
+```
+
+CMI creates the `KEY` values in `Worth.yml` automatically. Do not add extra
+custom keys to `Worth.yml`; they are expected to be filtered out. Use the Paper
+API material list as a validation resource instead.
+
+## Review Policy
+
+Reports should explain what is different, why it may matter, and what the
+suggested value would change. Include recipe paths, raw material value,
+farmability or ease of access, inflation risk, human value expectations, and
+the resulting `/buy` price impact.
+
+Price edits should be opt-in: suggest the changes first, then apply them after
+approval.
+
+## Helper Plugin Idea
+
+A small Paper helper plugin could inspect registered recipes, compare them
+against `data/CMI/Worth.yml`, and produce a report with suggested CMI commands
+instead of writing changes directly.
+
+Useful Paper resources:
+
+- [Paper recipe docs](https://docs.papermc.io/paper/dev/recipes/)
+- [Paper 26.1.2 Material enum](https://jd.papermc.io/paper/26.1.2/org/bukkit/Material.html)
+- [Paper 26.1.2 Server recipe methods](https://jd.papermc.io/paper/26.1.2/org/bukkit/Server.html#getRecipesFor(org.bukkit.inventory.ItemStack))
+- [Paper 26.1.2 inventory recipe classes](https://jd.papermc.io/paper/26.1.2/org/bukkit/inventory/package-summary.html)
+
 ## Workflow
 
-1. Import the current live-server CMI `worth.yml` into a reference location.
+1. Keep `data/CMI/Worth.yml` and `data/ShopGUIPlus/shops/` synced from the local test server.
 2. Define the item blacklist and document why each item is excluded.
 3. Build or import a complete item list for the target server version, starting with `26.1.2`.
 4. Normalize `worth.yml` so every allowed item has an intentional value.
