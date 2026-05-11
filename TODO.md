@@ -59,6 +59,7 @@
 - [x] Smoke test `/worthhelper export` on the economy test server.
 - [x] Decide where exported WorthHelper reports should live in this repo.
 - [x] Save the first exported WorthHelper report under `reports/worth/`.
-- [ ] Triage first WorthHelper report into review batches.
+- [x] Triage first WorthHelper report into review batches.
 - [ ] Review high-risk `possible-recipe-loop-review` entries before any other changes.
+- [ ] Have staff manually review Priority A and Priority B from `reports/worth/2026-05-11-possible-loop-priority-review.md`.
 - [ ] Review `under-recipe-review` entries separately and avoid raising farmable items blindly.
