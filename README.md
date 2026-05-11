@@ -33,6 +33,15 @@ Pricing should account for how items enter the economy, including:
 The first pass should cover all in-game items except a small documented
 blacklist of items that should not be sold or bought.
 
+Current unofficial blacklist:
+
+- Lingering potions.
+- Potions.
+- Splash potions.
+- Tipped arrows.
+- Ominous bottles.
+- Creative-only blocks, including test block and test instance block.
+
 ## Repository Layout
 
 Planned structure:
@@ -46,6 +55,11 @@ Planned structure:
 When live or test-server config files need to be reviewed, copy the relevant
 files into `reference/`, `worth/`, or `shops/` instead of committing a full
 server directory.
+
+Current local source paths:
+
+- CMI worth file: `servers/Paper-26.1.2/plugins/CMI/Saves/Worth.yml`
+- ShopGUI+ buy shop files: `servers/Paper-26.1.2/plugins/ShopGUIPlus/shops/*.yml`
 
 ## Workflow
 
