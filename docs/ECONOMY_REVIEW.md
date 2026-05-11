@@ -11,6 +11,10 @@ pushed to GitHub.
 The `servers/` folder stays ignored because it contains local runtime files,
 jars, logs, databases, and generated plugin data.
 
+WorthHelper exports that should be kept for review belong in `reports/worth/`.
+The first saved report is
+`reports/worth/worthhelper-report-2026-05-11T08-04-18.011002Z.md`.
+
 ## CMI Commands
 
 Set an item sell worth:

@@ -13,6 +13,7 @@
 - [ ] Build or import a complete in-game item list for the target server version.
 - [ ] Define and document the item blacklist.
 - [ ] Confirm the unofficial blacklist: lingering potions, potions, splash potions, tipped arrows, ominous bottles, and creative-only blocks like test block and test instance block.
+- [ ] Decide whether `TEST_BLOCK` and `TEST_INSTANCE_BLOCK` should be added to WorthHelper's configured blacklist to reduce expected-missing noise.
 - [ ] Check that every allowed item exists in the core `worth.yml`.
 - [ ] Normalize item names and formatting so diffs stay readable.
 - [ ] Identify missing, duplicated, obsolete, or renamed items.
@@ -51,9 +52,13 @@
 - [x] Use the Paper 26.1.2 `Material` enum as the canonical item/material list for completeness checks.
 - [x] Ensure helper tooling outputs suggested `cmi setworth item -s:value` commands without applying them automatically.
 - [x] Copy 1MB-CMIAPI-LIB, WorthDrift, and WorthHelper build `216` jars to the economy test server.
-- [ ] Smoke test `/worthhelper status` on the economy test server.
-- [ ] Smoke test `/worthhelper scan` on the economy test server.
-- [ ] Smoke test `/worthhelper missing` on the economy test server.
-- [ ] Smoke test `/worthhelper recipes diamond_block` on the economy test server.
-- [ ] Smoke test `/worthhelper export` on the economy test server.
-- [ ] Decide where exported WorthHelper reports should live in this repo.
+- [x] Smoke test `/worthhelper status` on the economy test server.
+- [x] Smoke test `/worthhelper scan` on the economy test server.
+- [x] Smoke test `/worthhelper missing` on the economy test server.
+- [x] Smoke test `/worthhelper recipes diamond_block` on the economy test server.
+- [x] Smoke test `/worthhelper export` on the economy test server.
+- [x] Decide where exported WorthHelper reports should live in this repo.
+- [x] Save the first exported WorthHelper report under `reports/worth/`.
+- [ ] Triage first WorthHelper report into review batches.
+- [ ] Review high-risk `possible-recipe-loop-review` entries before any other changes.
+- [ ] Review `under-recipe-review` entries separately and avoid raising farmable items blindly.
